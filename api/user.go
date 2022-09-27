@@ -1,8 +1,9 @@
 package api
 
 import (
-	"fmt"
 	"time"
+
+	"github.com/zhaolion/yuque-tools/api/pretty"
 )
 
 type UserCurrentResponse struct {
@@ -10,7 +11,7 @@ type UserCurrentResponse struct {
 }
 
 func (resp *UserCurrentResponse) String() string {
-	return fmt.Sprintf("%+v", resp.Data)
+	return pretty.Struct(&resp.Data)
 }
 
 type UserDetail struct {
