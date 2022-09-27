@@ -22,6 +22,8 @@ func init() {
 	Chain(rootCmd, "version", "show binary version", version)
 	// hello cmd, test the token
 	Chain(rootCmd, "hello", "test token", hello)
+	// user cmd, show user information
+	Chain(rootCmd, "user", "show user information", user)
 }
 
 // rootCmd represents the base command when called without any subcommands
