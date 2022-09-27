@@ -1,0 +1,22 @@
+{
+  "data": {
+    "id": 33482482,
+    "space_id": 0,
+    "organization_id": 0,
+    "login": "test-lion",
+    "name": "test-lion",
+    "avatar_url": "https://gw.alipayobjects.com/zos/rmsportal/SZXCSCJTuhRSmAggBlVp.png",
+    "owner_id": 114999,
+    "books_count": 0,
+    "public_books_count": 0,
+    "topics_count": 0,
+    "public_topics_count": 0,
+    "members_count": 0,
+    "public": 1,
+    "description": "test-lion",
+    "created_at": "2022-09-27T09:44:44.000Z",
+    "updated_at": "2022-09-27T09:44:44.000Z",
+    "grains_sum": 0,
+    "_serializer": "v2.group_detail"
+  }
+}

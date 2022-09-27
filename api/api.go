@@ -72,6 +72,9 @@ func clientOptionRetry(cfg *Config) clientOption {
 				// Set the retry sleep interval with a commonly used algorithm: capped exponential backoff with
 				// jitter (https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/).
 				SetCommonRetryBackoffInterval(1*time.Second, 5*time.Second).
+				SetCommonRetryCondition(func(resp *req.Response, err error) bool {
+					return resp.StatusCode >= 500
+				}).
 				// Set the retry to use a custom retry interval algorithm.
 				SetCommonRetryInterval(func(resp *req.Response, attempt int) time.Duration {
 					// Sleep seconds from "Retry-After" response header if it is present and correct.
