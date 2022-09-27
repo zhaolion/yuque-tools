@@ -1,16 +1,18 @@
 package api
 
 import (
+	"fmt"
 	"time"
 
+	"github.com/imroc/req/v3"
 	"github.com/zhaolion/yuque-tools/api/pretty"
 )
 
-type UserCurrentResponse struct {
+type UserResponse struct {
 	Data UserDetail `json:"data"`
 }
 
-func (resp *UserCurrentResponse) String() string {
+func (resp *UserResponse) String() string {
 	return pretty.Struct(&resp.Data)
 }
 
@@ -33,18 +35,28 @@ type UserDetail struct {
 	Serializer       string    `json:"_serializer"`
 }
 
-// UserCurrent 获取认证的用户的个人信息
-// curl --location --request GET 'https://www.yuque.com/api/v2/user' \
-//	--header 'X-Auth-Token: abcd'
-func (c *Client) UserCurrent() (*UserCurrentResponse, error) {
+// User 获取认证的用户的个人信息
+func (c *Client) User(query ...string) (*UserResponse, error) {
 	var (
-		response UserCurrentResponse
+		response UserResponse
 		apiErr   YuqueError
+		resp     *req.Response
+		err      error
 	)
-	resp, err := c.Client.R().
-		SetError(&apiErr).
-		SetResult(&response).
-		Get("user")
+	if len(query) == 0 {
+		// curl --location --request GET 'https://www.yuque.com/api/v2/user' \
+		//	--header 'X-Auth-Token: abcd'
+		resp, err = c.Client.R().
+			SetError(&apiErr).
+			SetResult(&response).
+			Get("user")
+	} else {
+		// 获取单个用户信息
+		resp, err = c.Client.R().
+			SetError(&apiErr).
+			SetResult(&response).
+			Get(fmt.Sprintf("users/%s", query[0]))
+	}
 	if err != nil {
 		return nil, err
 	}

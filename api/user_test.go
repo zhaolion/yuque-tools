@@ -8,6 +8,7 @@ import (
 
 func TestClient_UserCurrent(t *testing.T) {
 	type args struct {
+		query      []string
 		method     string
 		path       string
 		statusCode int
@@ -19,12 +20,34 @@ func TestClient_UserCurrent(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "200",
+			name: "200-current",
 			args: args{
 				method:     "GET",
 				path:       "/user",
 				statusCode: 200,
 				golden:     "./testdata/user.golden.json",
+			},
+			wantErr: false,
+		},
+		{
+			name: "200-id",
+			args: args{
+				query:      []string{"114999"},
+				method:     "GET",
+				path:       "/users/114999",
+				statusCode: 200,
+				golden:     "./testdata/users.golden.json",
+			},
+			wantErr: false,
+		},
+		{
+			name: "200-login",
+			args: args{
+				query:      []string{"zhaolion"},
+				method:     "GET",
+				path:       "/users/zhaolion",
+				statusCode: 200,
+				golden:     "./testdata/users.golden.json",
 			},
 			wantErr: false,
 		},
@@ -45,7 +68,7 @@ func TestClient_UserCurrent(t *testing.T) {
 			defer ts.Close()
 
 			c := client(ts.URL)
-			got, err := c.UserCurrent()
+			got, err := c.User(tt.args.query...)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Hello() error = %v, wantErr %v", err, tt.wantErr)
 				return

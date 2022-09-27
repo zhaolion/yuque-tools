@@ -6,14 +6,12 @@ import (
 )
 
 func user(_ context.Context, args []string) error {
-	if len(args) == 0 {
-		resp, err := client.UserCurrent()
-		if err != nil {
-			return err
-		}
-
-		fmt.Println(resp.String())
+	resp, err := client.User(args...)
+	if err != nil {
+		return err
 	}
+
+	fmt.Println(resp.String())
 
 	return nil
 }
