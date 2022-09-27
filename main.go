@@ -5,7 +5,7 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package main
 
 import (
-	"yuque-tools/cmd"
+	"github.com/zhaolion/yuque-tools/cmd"
 )
 
 var (
