@@ -14,4 +14,4 @@ test:
 build:
 	@rm -rf bin
 	@mkdir -p bin
-	CGO_ENABLED=0 go build -o bin/yuque -ldflags "-X 'main.BuildStamp=${buildStamp}' -X 'main.Version=${gitHash}'" main.go
+	CGO_ENABLED=0 go build -o bin/yuque-tools -ldflags "-X 'main.BuildStamp=${buildStamp}' -X 'main.Version=${gitHash}'" main.go
