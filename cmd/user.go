@@ -11,7 +11,7 @@ func user(_ context.Context, args []string) error {
 		return err
 	}
 
-	fmt.Println(resp.String())
+	fmt.Println(resp.PrettyString())
 
 	return nil
 }

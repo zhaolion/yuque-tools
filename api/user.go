@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -12,8 +13,13 @@ type UserResponse struct {
 	Data UserDetail `json:"data"`
 }
 
-func (resp *UserResponse) String() string {
+func (resp *UserResponse) PrettyString() string {
 	return pretty.Struct(&resp.Data)
+}
+
+func (resp *UserResponse) String() string {
+	data, _ := json.Marshal(resp)
+	return string(data)
 }
 
 type UserDetail struct {
