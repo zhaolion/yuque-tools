@@ -52,6 +52,8 @@ func (c *Client) User(query ...string) (*UserResponse, error) {
 			Get("user")
 	} else {
 		// 获取单个用户信息
+		// curl --location --request GET 'https://www.yuque.com/api/v2/users/114999' \
+		//--header 'X-Auth-Token: abcd'
 		resp, err = c.Client.R().
 			SetError(&apiErr).
 			SetResult(&response).
